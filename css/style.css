@@ -1,0 +1,1353 @@
+/* ==========================================================================
+   SISTEMA DE DISEÑO Y ESTILOS PRINCIPALES (RESPONSIVE & PRÉMIUM)
+   Invitación Digital Interactiva - Baby Shower Niña
+   ========================================================================== */
+
+/* 1. VARIABLES Y DESIGN TOKENS */
+:root {
+  /* Paleta Baby Shower Niña: Rosa Pastel, Lila Suave, Oro Rosado y Crema */
+  --primary-pink: #d48296;
+  --primary-pink-hover: #be6d81;
+  --primary-pink-light: #fdf0f3;
+  --color-lilac: #ab90be;
+  --color-lilac-soft: #f5edf8;
+  --color-gold-rose: #d69ca3;
+  
+  --primary-gold: #d48296; /* Mapeado para mantener coherencia */
+  --primary-gold-hover: #be6d81;
+  --primary-gold-light: #fdf0f3;
+  
+  --gold-gradient: linear-gradient(135deg, #e8a2b5 0%, #f7d5df 50%, #cca0b4 100%);
+  --gold-border-gradient: linear-gradient(135deg, rgba(212, 130, 150, 0.45), rgba(255, 255, 255, 0.85), rgba(171, 144, 190, 0.35));
+  
+  --color-sage: #ab90be; /* Tono lila para acentos */
+  --color-sage-soft: #f5edf8;
+  --color-dark: #2e262a;
+  --color-text-muted: #74676d;
+  --color-bg-base: #fdfafb;
+  --color-card-bg: rgba(255, 255, 255, 0.70); /* 30% menos de opacidad (70%) */
+  --color-card-border: rgba(212, 130, 150, 0.22);
+  
+  /* Sombras y Glassmorphism */
+  --shadow-sm: 0 4px 12px rgba(130, 80, 100, 0.05);
+  --shadow-md: 0 10px 30px rgba(130, 80, 100, 0.08);
+  --shadow-lg: 0 20px 45px rgba(130, 80, 100, 0.12);
+  --shadow-gold: 0 8px 25px rgba(212, 130, 150, 0.3);
+  --glass-blur: blur(14px);
+  
+  /* Tipografías */
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: 'Great Vibes', cursive, 'Brush Script MT';
+
+  /* Espaciados y Bordes */
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-full: 9999px;
+  --max-content-width: 580px;
+}
+
+/* Espacio reservado para fuentes locales (descomentar si colocas archivos en assets/fonts/) */
+/*
+@font-face {
+  font-family: 'MiFuenteElegante';
+  src: url('../assets/fonts/mi-fuente.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* 2. RESET Y BASE */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-dark);
+  background-color: var(--color-bg-base);
+  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Capa de fondo limpia (lienzo de papel sin nubes) con 50% de opacidad */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(247, 213, 223, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(245, 237, 248, 0.5) 0%, transparent 45%),
+    url('../assets/backgrounds/bg_clean.jpg');
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  background-position: center top;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   CAPA DE ESTRELLAS PARALLAX (star.webp) - LLUVIA DE ESTRELLAS MÁGICA
+   Orden: Fondo (0) -> Estrellas (1) -> Nubes (2) -> Contenido (3)
+   ========================================================================== */
+.stars-parallax-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none !important;
+  overflow: hidden;
+}
+
+.parallax-star {
+  position: absolute;
+  pointer-events: none !important;
+  will-change: transform;
+}
+
+.parallax-star img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none !important;
+  filter: drop-shadow(0 2px 10px rgba(247, 186, 205, 0.75));
+  animation: starTwinkleFade 5s ease-in-out infinite alternate;
+}
+
+/* Animación de aparición, rotación, destello y desaparición orgánica */
+@keyframes starTwinkleFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) rotate(-15deg);
+  }
+  22% {
+    opacity: 0.85;
+    transform: scale(0.95) rotate(-3deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18) rotate(16deg);
+    filter: drop-shadow(0 0 14px rgba(255, 195, 218, 0.95));
+  }
+  78% {
+    opacity: 0.70;
+    transform: scale(0.95) rotate(6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.35) rotate(-10deg);
+  }
+}
+
+/* Distribución por toda la pantalla (desde la parte superior hasta abajo) y tiempos desincronizados */
+.star-1  { top: 18px;  left: 8%;  width: 32px; }
+.star-1 img { animation-duration: 4.2s; animation-delay: 0s; }
+
+.star-2  { top: 42px;  right: 12%; width: 44px; }
+.star-2 img { animation-duration: 5.6s; animation-delay: -2.3s; }
+
+.star-3  { top: 68px;  left: 48%; width: 26px; }
+.star-3 img { animation-duration: 3.8s; animation-delay: -1.1s; }
+
+.star-4  { top: 115px; right: 26%; width: 36px; }
+.star-4 img { animation-duration: 6.0s; animation-delay: -3.5s; }
+
+.star-5  { top: 175px; left: 14%; width: 46px; }
+.star-5 img { animation-duration: 4.9s; animation-delay: -0.7s; }
+
+.star-6  { top: 235px; right: 8%;  width: 28px; }
+.star-6 img { animation-duration: 5.2s; animation-delay: -4.1s; }
+
+.star-7  { top: 295px; left: 74%; width: 40px; }
+.star-7 img { animation-duration: 4.5s; animation-delay: -1.9s; }
+
+.star-8  { top: 355px; left: 6%;  width: 38px; }
+.star-8 img { animation-duration: 6.4s; animation-delay: -3.0s; }
+
+.star-9  { top: 415px; right: 15%; width: 34px; }
+.star-9 img { animation-duration: 5.0s; animation-delay: -2.5s; }
+
+.star-10 { top: 475px; left: 24%; width: 48px; }
+.star-10 img { animation-duration: 4.0s; animation-delay: -0.4s; }
+
+.star-11 { top: 535px; right: 33%; width: 28px; }
+.star-11 img { animation-duration: 5.8s; animation-delay: -4.6s; }
+
+.star-12 { top: 595px; left: 10%; width: 42px; }
+.star-12 img { animation-duration: 4.4s; animation-delay: -1.5s; }
+
+.star-13 { top: 655px; right: 9%;  width: 36px; }
+.star-13 img { animation-duration: 6.1s; animation-delay: -3.2s; }
+
+.star-14 { top: 715px; left: 66%; width: 44px; }
+.star-14 img { animation-duration: 4.7s; animation-delay: -0.9s; }
+
+.star-15 { top: 775px; left: 16%; width: 30px; }
+.star-15 img { animation-duration: 5.4s; animation-delay: -2.8s; }
+
+.star-16 { top: 835px; right: 18%; width: 46px; }
+.star-16 img { animation-duration: 4.3s; animation-delay: -1.7s; }
+
+.star-17 { top: 885px; left: 42%; width: 32px; }
+.star-17 img { animation-duration: 6.3s; animation-delay: -4.0s; }
+
+.star-18 { top: 935px; right: 10%; width: 38px; }
+.star-18 img { animation-duration: 5.1s; animation-delay: -2.0s; }
+
+/* ==========================================================================
+   CAPA DE NUBES TRANSPARENTES INDEPENDIENTES CON PARALLAX Y FLOTACIÓN
+   ========================================================================== */
+.clouds-parallax-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 2; /* Encima de las estrellas (1) y debajo del contenido (3) */
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.70; /* Reducida 30% de opacidad según lo solicitado */
+}
+
+.cloud-parallax-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cloud-top-wrapper {
+  top: 0;
+  height: clamp(340px, 48vh, 600px);
+}
+
+.cloud-bottom-wrapper {
+  bottom: 0;
+  height: clamp(340px, 48vh, 600px);
+}
+
+.cloud-layer {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Nubes superiores transparentes */
+.cloud-top {
+  background-image: url('../assets/backgrounds/clouds_top.png');
+  background-position: center top;
+  background-size: 100% auto;
+  animation: cloudFloatTop 10s ease-in-out infinite alternate;
+}
+
+/* Nubes inferiores transparentes */
+.cloud-bottom {
+  background-image: url('../assets/backgrounds/clouds_bottom.png');
+  background-position: center bottom;
+  background-size: 100% auto;
+  animation: cloudFloatBottom 12s ease-in-out infinite alternate;
+}
+
+/* Animaciones orgánicas de flotación y balanceo para las nubes */
+@keyframes cloudFloatTop {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(8px, -12px) scale(1.02);
+  }
+  100% {
+    transform: translate(-5px, -4px) scale(0.99);
+  }
+}
+
+@keyframes cloudFloatBottom {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-8px, 12px) scale(1.02);
+  }
+  100% {
+    transform: translate(6px, 4px) scale(0.99);
+  }
+}
+
+/* Contenedor central fluido */
+.invitation-container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 28px);
+  position: relative;
+  z-index: 3; /* Encima de nubes (2), estrellas (1) y fondo base (0) */
+  overflow-x: hidden;
+}
+
+/* 3. BARRA DE PROGRESO DE SCROLL */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--gold-gradient);
+  z-index: 999;
+  transition: width 0.1s ease-out;
+}
+
+/* ====================================================================
+   LAZOS DECORATIVOS EN ESQUINAS DE LA PANTALLA (l2.webp)
+   Aparecen dinámicamente cuando la foto sube hasta la mitad de pantalla
+   ==================================================================== */
+.screen-bow-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 35;
+  pointer-events: none !important;
+  will-change: transform, opacity;
+  display: block;
+  opacity: 0; /* Controlado dinámicamente por scroll en animations.js */
+  transition: opacity 0.15s ease-out;
+}
+
+.screen-bow-wrapper * {
+  pointer-events: none !important;
+}
+
+.screen-bow-left {
+  transform-origin: center center;
+}
+
+.screen-bow-right {
+  transform-origin: center center;
+}
+
+.screen-bow-img {
+  width: clamp(60px, 13vw, 84px);
+  height: auto;
+  display: block;
+  /* 30% menos de opacidad según lo solicitado (0.70) */
+  opacity: 0.70;
+  filter: drop-shadow(0 4px 12px rgba(186, 120, 140, 0.35));
+  user-select: none;
+  pointer-events: none !important;
+}
+
+/* 4. BOTÓN FLOTANTE DE MÚSICA */
+.audio-control-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(212, 130, 150, 0.35);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.audio-control-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-gold);
+}
+
+.audio-control-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--primary-pink);
+  transition: fill 0.2s;
+}
+
+.audio-control-btn.playing {
+  animation: pulse-ring 2s infinite;
+}
+
+body.envelope-locked {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
+/* 5. EXPERIENCIA DE APERTURA (SOBRE CON IMAGEN) */
+.envelope-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: radial-gradient(circle at center, rgba(253, 245, 247, 0.96) 0%, rgba(246, 235, 248, 0.98) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), backdrop-filter 0.5s ease;
+}
+
+.envelope-overlay.revealing {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  pointer-events: none;
+}
+
+.envelope-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  max-width: 320px;
+  width: 82vw;
+  animation: float-gentle 4s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.envelope-scene:hover:not(.is-bouncing-down) .envelope-img-box {
+  transform: translateY(-4px) scale(1.02);
+  filter: drop-shadow(0 20px 36px rgba(186, 120, 140, 0.36));
+}
+
+/* Animación ágil: rebote sutil y caída inmediata hacia abajo */
+.envelope-scene.is-bouncing-down {
+  animation: bounceUpAndFallDown 0.65s cubic-bezier(0.25, 0.1, 0.25, 1) forwards !important;
+  pointer-events: none;
+}
+
+@keyframes bounceUpAndFallDown {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  22% {
+    transform: translateY(-28px) scale(1.03);
+    opacity: 1;
+    filter: drop-shadow(0 20px 35px rgba(186, 120, 140, 0.4));
+  }
+  100% {
+    transform: translateY(115vh) scale(0.92);
+    opacity: 0;
+    filter: drop-shadow(0 10px 20px rgba(186, 120, 140, 0));
+  }
+}
+
+/* Texto arriba: "Celebra junto a nosotros" */
+.envelope-heading {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 6.2vw, 2.75rem);
+  color: var(--primary-pink);
+  text-align: center;
+  margin: 0 0 10px;
+  line-height: 1.15;
+  font-weight: normal;
+  text-shadow: 0 2px 8px rgba(212, 130, 150, 0.25);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Contenedor de la imagen del sobre */
+.envelope-img-box {
+  position: relative;
+  width: 100%;
+  max-width: 275px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 14px 28px rgba(186, 120, 140, 0.26));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+}
+
+/* Imagen del sobre */
+.envelope-img {
+  width: 100%;
+  max-width: 275px;
+  max-height: min(44vh, 260px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Botón "Presiona para abrir" situado en la parte inferior interior del sobre */
+.envelope-tap-badge {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(212, 130, 150, 0.38);
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 3px 10px rgba(158, 72, 94, 0.16), 0 0 0 2px rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  animation: pulse-badge 2.4s infinite ease-in-out;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  z-index: 10;
+}
+
+.envelope-tap-badge:hover {
+  background: #ffffff;
+  box-shadow: 0 5px 14px rgba(158, 72, 94, 0.24), 0 0 0 3px rgba(212, 130, 150, 0.25);
+}
+
+.envelope-tap-text {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--primary-pink);
+  line-height: 1;
+}
+
+@keyframes pulse-badge {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 3px 10px rgba(158, 72, 94, 0.16), 0 0 0 2px rgba(255, 255, 255, 0.65);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 5px 14px rgba(158, 72, 94, 0.24), 0 0 0 4px rgba(212, 130, 150, 0.2);
+  }
+}
+
+@media (max-height: 620px) {
+  .envelope-heading {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  .envelope-img-box {
+    max-width: 220px;
+  }
+  .envelope-img {
+    max-height: 38vh;
+  }
+}
+
+/* 6. HERO SECTION */
+.hero-section {
+  text-align: center;
+  padding: clamp(30px, 6vw, 55px) 20px 25px;
+  position: relative;
+}
+
+/* Ilustración decorativa superior (b1.webp): entra desde arriba y tiene rebote continuo */
+.hero-top-illustration {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 16px;
+  opacity: 0;
+  transform: translateY(-40px);
+  will-change: opacity, transform;
+  position: relative;
+}
+
+.hero-top-illustration.entering {
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-top-illustration.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animación sutil de rebote y 20% más grande */
+@keyframes b1Bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-9px) scale(1.03);
+  }
+}
+
+.hero-top-img {
+  width: clamp(120px, 32vw, 165px);
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  /* Sombra natural y limpia sin destellos ni halos brillantes */
+  filter: drop-shadow(0 6px 14px rgba(186, 120, 140, 0.22));
+  display: block;
+  animation: b1Bounce 2.8s ease-in-out infinite;
+}
+
+/* Título Baby Shower 20% más grande y elevado */
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 11.5vw, 5.3rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--color-dark);
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+/* Bloque del nombre: "de" arriba y "Lilith" abajo más grande con animación */
+.hero-name-block {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-prep {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 6vw, 2.7rem);
+  color: var(--primary-pink);
+  line-height: 1;
+  display: block;
+  margin-bottom: -4px;
+}
+
+.hero-baby-name {
+  font-family: var(--font-script);
+  font-size: clamp(3.6rem, 12vw, 5.2rem);
+  color: var(--primary-pink);
+  line-height: 1.05;
+  display: inline-block;
+  text-shadow: 0 4px 22px rgba(212, 130, 150, 0.35);
+  animation: lilithShinePulse 3.2s ease-in-out infinite;
+}
+
+@keyframes lilithShinePulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 2px 8px rgba(212, 130, 150, 0.25));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 18px rgba(212, 130, 150, 0.5));
+  }
+}
+
+/* Foto principal del Hero con bordes totalmente difuminados que se funden en el fondo */
+.hero-photo-wrapper {
+  margin: 18px auto 28px;
+  max-width: 320px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: opacity, transform, filter;
+}
+
+/* Resplandor cálido ambiental detrás de la foto */
+.hero-photo-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(247, 213, 223, 0.75) 0%, rgba(253, 245, 247, 0) 75%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-photo {
+  width: 100%;
+  max-width: 305px;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  display: block;
+  border-radius: 0;
+  /* Difuminado amplio y progresivo: 18% sólido al centro, difuminándose suavemente hasta 94% transparente */
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 18%, rgba(0, 0, 0, 0.75) 42%, rgba(0, 0, 0, 0.25) 68%, transparent 94%);
+  mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 18%, rgba(0, 0, 0, 0.75) 42%, rgba(0, 0, 0, 0.25) 68%, transparent 94%);
+  box-shadow: none;
+}
+
+/* =========================================================================
+   LAZOS DECORATIVOS DE ESQUINA (lazo1.png) EN LA FOTO PRINCIPAL
+   ========================================================================= */
+.hero-corner-ribbon {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 1 !important; /* 100% de opacidad según lo solicitado */
+  filter: drop-shadow(0 6px 16px rgba(186, 120, 140, 0.42));
+  transition: transform 0.3s ease;
+}
+
+/* Esquina superior izquierda */
+.hero-ribbon-top-left {
+  top: -18px;
+  left: -16px;
+  /* =========================================================================
+     ¡AQUÍ PUEDES AJUSTAR EL PORCENTAJE DEL TAMAÑO A TU GUSTO (Lazo Superior)!
+     Modifica el porcentaje de 'width' (por ejemplo: 50%, 58%, 65%, 72%)
+     ========================================================================= */
+  width: 58%;
+  transform-origin: top left;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Esquina inferior derecha */
+.hero-ribbon-bottom-right {
+  bottom: -16px;
+  right: -14px;
+  /* =========================================================================
+     ¡AQUÍ PUEDES AJUSTAR EL PORCENTAJE DEL TAMAÑO A TU GUSTO (Lazo Inferior)!
+     Modifica el porcentaje de 'width' (por ejemplo: 50%, 58%, 65%, 72%)
+     ========================================================================= */
+  width: 58%;
+  transform-origin: center center;
+  transform: rotate(180deg);
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.hero-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 3.5vw, 1.2rem);
+  color: var(--color-text-muted);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Frase puente hacia las tarjetas */
+.hero-invite-lead {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 3.8vw, 1.35rem);
+  font-weight: 500;
+  color: var(--primary-pink);
+  margin: 18px auto 0;
+  max-width: 440px;
+  line-height: 1.45;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+/* 7. TARJETAS PRÉMIUM CON GLASSMORPHISM (ROLL-UP) */
+.invitation-card {
+  background: var(--color-card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-md);
+  padding: clamp(24px, 5vw, 34px) clamp(20px, 4vw, 28px);
+  margin-bottom: 28px;
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  /* 30% menos de opacidad según lo solicitado (quedan en 70%) */
+  opacity: 0.70;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.3s ease;
+}
+
+.invitation-card.is-visible {
+  opacity: 0.70 !important;
+}
+
+.invitation-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  opacity: 0.90 !important;
+}
+
+.card-ornament {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.4rem;
+  opacity: 0.25;
+  color: var(--primary-gold);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--color-sage-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-sage);
+}
+
+.card-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4.5vw, 1.85rem);
+  color: var(--color-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+/* 8. TARJETA OBSEQUIO CON ILUSTRACIÓN BEBÉ EN NUBE (b2.webp) */
+.card-obsequio-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(14px, 3.5vw, 24px);
+  margin: 16px 0 10px;
+}
+
+.card-obsequio-text-col {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.card-obsequio-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.38rem, 4.6vw, 1.85rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.45;
+  margin: 0;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(212, 130, 150, 0.12);
+}
+
+.card-obsequio-baby-col {
+  flex: 0 0 auto;
+  width: clamp(95px, 26vw, 130px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Animación de entrada suave desde la derecha según scroll */
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* Cuando la tarjeta entra en pantalla o por scroll observer */
+.invitation-card.is-visible .card-obsequio-baby-col,
+.card-obsequio-baby-col.is-entered {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card-obsequio-baby-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(212, 130, 150, 0.35));
+  animation: babyCloudFloat 4.2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes babyCloudFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2.5deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(4px) rotate(-1.5deg);
+  }
+}
+
+@media (max-width: 420px) {
+  .card-obsequio-layout {
+    gap: 12px;
+  }
+}
+
+/* Partículas brillantes decorativas */
+.sparkle-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffffff 30%, #f7c5d3 70%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none !important;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* 9. BOTONES DE ACCIÓN */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: var(--gold-gradient);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--color-dark);
+  border: 1px solid var(--color-card-border);
+}
+
+.btn-secondary:hover {
+  background: #fdfbf7;
+  border-color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+@media (min-width: 480px) {
+  .button-group-row {
+    flex-direction: row;
+  }
+}
+
+/* 10. ITINERARIO / DETALLES DEL EVENTO */
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.detail-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--primary-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary-gold-hover);
+}
+
+.detail-icon-circle svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.detail-content h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-dark);
+  margin-bottom: 2px;
+}
+
+.detail-content p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* 11. CÓDIGO DE VESTIMENTA */
+.dress-code-visual {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.color-swatch {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.15);
+}
+
+.dress-code-tag {
+  display: inline-block;
+  background: var(--color-sage-soft);
+  color: var(--color-sage);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* 12. MESA DE REGALOS & DATOS BANCARIOS */
+.gift-card-box {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px dashed var(--primary-gold);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.bank-detail-text {
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: var(--color-dark);
+  margin: 8px 0;
+  user-select: all;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--primary-gold-hover);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--primary-gold-light);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.copy-btn:hover {
+  background: #f1e3c7;
+  transform: scale(1.05);
+}
+
+/* 13. FORMULARIO RSVP / ASISTENCIA */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+/* 14. PIE DE PÁGINA / FOOTER */
+.invitation-footer {
+  text-align: center;
+  padding: 40px 20px 60px;
+  color: var(--color-text-muted);
+}
+
+.footer-script {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  color: var(--primary-gold);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+/* 15. TOAST NOTIFICATION */
+.toast-notice {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #232220;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   16. HERRAMIENTA TEMPORAL: PANEL DE COORDENADAS DE SCROLL (DEBUG HUD)
+   ========================================================================== */
+.scroll-hud-container {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  z-index: 10000;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Consolas', monospace;
+  pointer-events: none; /* No intercepta gestos ni toques en la pantalla */
+}
+
+.scroll-hud-toggle-btn {
+  background: rgba(32, 25, 29, 0.90);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f7d5df;
+  border: 1px solid rgba(212, 130, 150, 0.48);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  pointer-events: auto; /* Solo el botón recibe clics */
+}
+
+.scroll-hud-toggle-btn:hover {
+  background: rgba(45, 34, 40, 0.98);
+  border-color: var(--primary-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(212, 130, 150, 0.38);
+}
+
+.scroll-hud-panel {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  width: 280px;
+  max-width: 90vw;
+  background: rgba(22, 17, 20, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 130, 150, 0.38);
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42);
+  padding: 14px;
+  color: #f0e6eb;
+  font-size: 0.74rem;
+  animation: hudFadeIn 0.2s ease-out;
+}
+
+@keyframes hudFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-title {
+  font-weight: 700;
+  color: #ffbcd2;
+  font-size: 0.78rem;
+}
+
+.hud-close-btn {
+  background: transparent;
+  border: none;
+  color: #baa2af;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.hud-close-btn:hover {
+  color: #ffffff;
+}
+
+.hud-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.35;
+}
+
+.hud-label {
+  color: #a89aa1;
+}
+
+.hud-value {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.hud-accent {
+  color: #ff9ec0;
+  font-weight: 700;
+}
+
+.hud-tag {
+  background: rgba(212, 130, 150, 0.2);
+  color: #fcaec7;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+}
+
+.hud-divider {
+  border: none;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+  margin: 4px 0;
+}
+
+.hud-footer {
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #8c7e85;
+  font-size: 0.66rem;
+  line-height: 1.3;
+}

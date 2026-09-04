@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+  <title>¡Estás Invitado! • Baby Shower de Lilith 👶✨</title>
+  <meta name="description"
+    content="Acompáñanos a celebrar la llegada de nuestro mayor tesoro. Toca aquí para ver todos los detalles, mapa y confirmar tu asistencia.">
+  <meta name="theme-color" content="#c5a059">
+
+  <!-- ====================================================================
+       VISTA PREVIA PARA WHATSAPP Y REDES SOCIALES (OPEN GRAPH / TWITTER)
+       Cuando subas tu web a Vercel, coloca el dominio final https://...
+       ==================================================================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="¡Estás Invitado! • Baby Shower de Lilith 👶✨">
+  <meta property="og:description"
+    content="Acompáñanos a celebrar la llegada de nuestro mayor tesoro. Toca aquí para ver todos los detalles, mapa y confirmar tu asistencia.">
+  <meta property="og:image" content="./assets/og/preview.jpg">
+  <meta property="og:image:secure_url" content="./assets/og/preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Invitación Digital Especial">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="¡Estás Invitado! • Baby Shower de Lilith 👶✨">
+  <meta name="twitter:description"
+    content="Acompáñanos a celebrar la llegada de nuestro mayor tesoro. Toca aquí para ver los detalles.">
+  <meta name="twitter:image" content="./assets/og/preview.jpg">
+
+  <!-- Google Fonts Prémium (Elegante combinación tipográfica) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body class="envelope-locked">
+
+  <!-- Barra de progreso de lectura / scroll -->
+  <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Botón flotante de música ambiental -->
+  <button class="audio-control-btn" id="audio-toggle-btn" aria-label="Control de música ambiental"
+    title="Reproducir música ambiental">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+    </svg>
+  </button>
+
+  <!-- ====================================================================
+       CAPA DE ESTRELLAS PARALLAX (star.webp) - LLUVIA DE ESTRELLAS
+       Jerarquía de capas: Fondo (0) -> Estrellas (1) -> Nubes (2) -> Contenido (3)
+       ==================================================================== -->
+  <div class="stars-parallax-container" id="stars-parallax-container" aria-hidden="true">
+    <div class="parallax-star star-1" data-base-top="18" data-speed="0.22"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-2" data-base-top="42" data-speed="0.32"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-3" data-base-top="68" data-speed="0.18"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-4" data-base-top="115" data-speed="0.28"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-5" data-base-top="175" data-speed="0.35"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-6" data-base-top="235" data-speed="0.20"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-7" data-base-top="295" data-speed="0.38"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-8" data-base-top="355" data-speed="0.25"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-9" data-base-top="415" data-speed="0.30"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-10" data-base-top="475" data-speed="0.16"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-11" data-base-top="535" data-speed="0.34"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-12" data-base-top="595" data-speed="0.22"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-13" data-base-top="655" data-speed="0.27"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-14" data-base-top="715" data-speed="0.36"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-15" data-base-top="775" data-speed="0.19"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-16" data-base-top="835" data-speed="0.33"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-17" data-base-top="885" data-speed="0.24"><img src="assets/images/star.webp" alt=""></div>
+    <div class="parallax-star star-18" data-base-top="935" data-speed="0.29"><img src="assets/images/star.webp" alt=""></div>
+  </div>
+
+  <!-- ====================================================================
+       CAPAS DE NUBES TRANSPARENTES INDEPENDIENTES CON EFECTO PARALLAX
+       ==================================================================== -->
+  <div class="clouds-parallax-container" id="clouds-parallax-container" aria-hidden="true">
+    <div class="cloud-parallax-wrapper cloud-top-wrapper" id="cloud-top-wrapper">
+      <div class="cloud-layer cloud-top"></div>
+    </div>
+    <div class="cloud-parallax-wrapper cloud-bottom-wrapper" id="cloud-bottom-wrapper">
+      <div class="cloud-layer cloud-bottom"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       LAZOS DECORATIVOS EN ESQUINAS DE LA PANTALLA CON ANIMACIÓN EN SCROLL
+       ==================================================================== -->
+  <div class="screen-bow-wrapper screen-bow-left" id="screen-bow-left" aria-hidden="true">
+    <img src="assets/images/l2.webp" alt="Lazo decorativo superior izquierdo" class="screen-bow-img">
+  </div>
+  <div class="screen-bow-wrapper screen-bow-right" id="screen-bow-right" aria-hidden="true">
+    <img src="assets/images/l2.webp" alt="Lazo decorativo superior derecho" class="screen-bow-img">
+  </div>
+
+  <!-- ====================================================================
+       PANTALLA DE APERTURA: SOBRE CON IMAGEN Y ANIMACIÓN DE REBOTE Y CAÍDA
+       ==================================================================== -->
+  <div class="envelope-overlay" id="envelope-overlay" role="dialog" aria-modal="true"
+    aria-label="Apertura de invitación">
+    <div class="envelope-scene" id="envelope-trigger" role="button" tabindex="0"
+      aria-label="Sobre de invitación. Presiona para abrir">
+
+      <!-- Texto arriba de la imagen -->
+      <h2 class="envelope-heading">Celebra junto a nosotros</h2>
+
+      <!-- Contenedor de la imagen del sobre con texto interactivo encima -->
+      <div class="envelope-img-box" id="envelope-img-box">
+        <img src="assets/images/sobre.png" alt="Sobre de invitación para Baby Shower de Lilith" class="envelope-img"
+          id="envelope-img" draggable="false">
+
+        <!-- Botón más pequeño situado en la parte inferior del sobre -->
+        <button type="button" class="envelope-tap-badge" id="envelope-btn"
+          aria-label="Presiona para abrir la invitación">
+          <span class="envelope-tap-text">Presiona para abrir</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       CONTENEDOR PRINCIPAL DE LA INVITACIÓN
+       ==================================================================== -->
+  <main class="invitation-container" id="main-content">
+
+    <!-- 1. HERO SECTION -->
+    <header class="hero-section">
+      <!-- Ilustración superior con imagen b1.webp (desciende al inicio y se desvanece al hacer scroll) -->
+      <div class="hero-top-illustration" id="hero-top-illustration">
+        <img src="assets/images/b1.webp" alt="Decoración Baby Shower de Lilith" class="hero-top-img" width="165"
+          height="150">
+      </div>
+
+      <h1 class="hero-title roll-up delay-100 gold-shimmer">Baby Shower</h1>
+      <div class="hero-name-block roll-up delay-200">
+        <span class="hero-prep">de</span>
+        <span class="hero-baby-name">Lilith</span>
+      </div>
+
+      <div class="hero-photo-wrapper fade-in-up delay-300" id="hero-photo-box">
+        <!-- Lazo decorativo grande en la esquina superior izquierda de la foto -->
+        <img src="assets/images/lazo1.png" alt="Lazo decorativo superior izquierdo"
+          class="hero-corner-ribbon hero-ribbon-top-left" id="hero-corner-ribbon">
+        <img src="assets/images/portrait.jpg?v=2" alt="Celebración del Baby Shower de Lilith" class="hero-photo"
+          id="hero-portrait-img" width="320" height="427" loading="eager">
+        <!-- Lazo decorativo grande en la esquina inferior derecha de la foto -->
+        <img src="assets/images/lazo1.png" alt="Lazo decorativo inferior derecho"
+          class="hero-corner-ribbon hero-ribbon-bottom-right" id="hero-corner-ribbon-bottom">
+      </div>
+
+      <blockquote class="hero-quote zoom-in delay-400">
+        "Un pequeño rayo de luz está por llegar a nuestras vidas para colmar nuestros corazones de amor infinito."
+      </blockquote>
+
+      <p class="hero-invite-lead fade-in-up delay-500">
+        Tenemos el agrado de invitarte a celebrar junto a nosotros
+      </p>
+    </header>
+
+    <!-- 2. TARJETA DÓNDE Y CUÁNDO (REVEAL DESDE LA IZQUIERDA) -->
+    <section class="invitation-card reveal-left" id="card-lugar-fecha" aria-labelledby="loc-heading">
+      <span class="card-ornament">🌿</span>
+      <div class="card-header">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+        </div>
+        <!-- <p class="card-subtitle">Recepción y Fiesta</p> -->
+        <h2 class="card-title" id="loc-heading">Lugar y Fecha</h2>
+      </div>
+
+      <div class="details-list">
+        <div class="detail-item">
+          <div class="detail-icon-circle">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z" />
+            </svg>
+          </div>
+          <div class="detail-content">
+            <h4>Fecha y Hora</h4>
+            <p>Sábado 19 de Septiembre de 2026<br>A las: 16:00 PM</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-icon-circle">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+          </div>
+          <div class="detail-content">
+            <h4>Lugar</h4>
+            <p><strong>4 de Noviembre y la 12</strong><br></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group" style="margin-top: 14px;">
+        <a href="https://maps.app.goo.gl/HUH8ssDyBD1PM8W67" target="_blank" rel="noopener noreferrer"
+          class="btn btn-primary" style="width: 100%; justify-content: center;">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+          Abrir en Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. TARJETA LLUVIA DE SOBRES / PRESENTES (REVEAL DESDE LA DERECHA) -->
+    <section class="invitation-card reveal-right card-obsequio" id="card-obsequio" aria-labelledby="gifts-heading">
+      <span class="card-ornament">✉️</span>
+      <div class="card-header">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>
+        </div>
+        <p class="card-subtitle">Obsequio</p>
+        <h2 class="card-title" id="gifts-heading"></h2>
+      </div>
+
+      <div class="card-obsequio-layout">
+        <div class="card-obsequio-text-col">
+          <p class="card-obsequio-text">
+            De antemano se les Agradece su obsequio en sobre cerrado
+          </p>
+        </div>
+        <div class="card-obsequio-baby-col" id="card-obsequio-baby">
+          <img src="assets/images/b2.webp" alt="Ilustración bebé en nube con estrellas" class="card-obsequio-baby-img" width="125" height="125">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FOOTER CON DESPEDIDA -->
+    <footer class="invitation-footer fade-in-up">
+      <span class="footer-script">Te esperamos</span>
+      <p class="footer-text">Maritza & Eduardo</p>
+      <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">Con mucho amor y cariño para todos nuestros
+        invitados</p>
+    </footer>
+
+  </main>
+
+  <!-- ====================================================================
+        HERRAMIENTA TEMPORAL: PANEL DE COORDENADAS DE SCROLL (DEBUG HUD)
+        Botón para aparecer/desaparecer y ver píxeles exactos de scroll
+        ==================================================================== -->
+  <aside class="scroll-hud-container" id="scroll-hud-container" aria-label="Depurador de coordenadas">
+    <button type="button" class="scroll-hud-toggle-btn" id="scroll-hud-toggle-btn" aria-expanded="false"
+      title="Mostrar/Ocultar Coordenadas">
+      <span class="hud-btn-icon">📏</span>
+      <span class="hud-btn-text">Coordenadas</span>
+    </button>
+
+    <div class="scroll-hud-panel" id="scroll-hud-panel" style="display: none;">
+      <div class="hud-header">
+        <span class="hud-title">🎯 Coordenadas de Scroll</span>
+        <button type="button" class="hud-close-btn" id="hud-close-btn" aria-label="Cerrar panel">✕</button>
+      </div>
+      <div class="hud-body">
+        <div class="hud-row">
+          <span class="hud-label">Scroll Y:</span>
+          <span class="hud-value hud-accent" id="hud-val-scrolly">0 px</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Progreso Scroll:</span>
+          <span class="hud-value" id="hud-val-scrollpct">0.0%</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Ventana (W×H):</span>
+          <span class="hud-value" id="hud-val-viewport">0 × 0</span>
+        </div>
+        <hr class="hud-divider">
+        <div class="hud-row">
+          <span class="hud-label">Foto Hero:</span>
+          <span class="hud-value" id="hud-val-photo">Top: 0 | Bot: 0</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Tarjeta Lugar/Fecha:</span>
+          <span class="hud-value" id="hud-val-card">Top: 0 px</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Lazos Pantalla:</span>
+          <span class="hud-value hud-tag" id="hud-val-bows">Ocultos</span>
+        </div>
+        <div class="hud-row">
+          <span class="hud-label">Efecto Humo Foto:</span>
+          <span class="hud-value" id="hud-val-smoke">0%</span>
+        </div>
+      </div>
+      <div class="hud-footer">
+        <small>📌 Usa estos números en px para indicar puntos exactos de scroll</small>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Scripts JavaScript -->
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

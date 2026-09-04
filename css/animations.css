@@ -1,0 +1,208 @@
+/* ==========================================================================
+   SISTEMA DE ANIMACIONES & TRANSICIONES (ROLL-UP, SCROLL REVEAL Y MICRO-INTERACCIONES)
+   ========================================================================== */
+
+/* 1. ANIMACIONES BASE DE SCROLL (INTERSECTION OBSERVER) */
+
+/* Roll Up Clásico: El elemento entra rodando sutilmente en 3D con desenfoque suave */
+.roll-up {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(18deg) translateY(48px) scale(0.95);
+  filter: blur(5px);
+  transition: 
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.roll-up.is-visible {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+  filter: blur(0px);
+}
+
+/* Fade In Up */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Zoom In Elegante */
+.zoom-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.zoom-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Reveal desde la izquierda */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  filter: blur(4px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0px);
+}
+
+/* Reveal desde la derecha */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(48px);
+  filter: blur(4px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0px);
+}
+
+/* Reveal desde arriba */
+.reveal-down {
+  opacity: 0;
+  transform: translateY(-45px);
+  filter: blur(4px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-down.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* 2. ESCALONAMIENTO / DELAYS PROGRESIVOS */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+.delay-600 { transition-delay: 0.6s; }
+
+/* 3. EFECTOS CONTINUOS Y MICRO-ANIMACIONES */
+
+/* Flotación sutil para el sobre */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Indicador de flecha para el sello */
+@keyframes bounce-horizontal {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Anillo pulsante para el botón de música */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(197, 160, 89, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0);
+  }
+}
+
+/* Rebote suave del texto de ayuda */
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Destello brillante rosa y oro suave que recorre títulos */
+.gold-shimmer {
+  background: linear-gradient(
+    90deg, 
+    #cf7a90 0%, 
+    #f8d5de 50%, 
+    #ab90be 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer-text 4s linear infinite;
+}
+
+@keyframes shimmer-text {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Destellos decorativos flotantes de fondo en tonos pastel */
+.sparkle-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fce4ec 0%, rgba(207, 122, 144, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle-twinkle 3s infinite ease-in-out;
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.4);
+  }
+}
+
+/* Cambio suave del contador */
+.counter-tick {
+  animation: tick-pop 0.35s ease-out;
+}
+
+@keyframes tick-pop {
+  0% {
+    transform: scale(1.18);
+    color: var(--primary-gold);
+  }
+  100% {
+    transform: scale(1);
+    color: var(--primary-gold-hover);
+  }
+}
