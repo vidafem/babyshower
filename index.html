@@ -290,59 +290,6 @@
 
   </main>
 
-  <!-- ====================================================================
-        HERRAMIENTA TEMPORAL: PANEL DE COORDENADAS DE SCROLL (DEBUG HUD)
-        Botón para aparecer/desaparecer y ver píxeles exactos de scroll
-        ==================================================================== -->
-  <aside class="scroll-hud-container" id="scroll-hud-container" aria-label="Depurador de coordenadas">
-    <button type="button" class="scroll-hud-toggle-btn" id="scroll-hud-toggle-btn" aria-expanded="false"
-      title="Mostrar/Ocultar Coordenadas">
-      <span class="hud-btn-icon">📏</span>
-      <span class="hud-btn-text">Coordenadas</span>
-    </button>
-
-    <div class="scroll-hud-panel" id="scroll-hud-panel" style="display: none;">
-      <div class="hud-header">
-        <span class="hud-title">🎯 Coordenadas de Scroll</span>
-        <button type="button" class="hud-close-btn" id="hud-close-btn" aria-label="Cerrar panel">✕</button>
-      </div>
-      <div class="hud-body">
-        <div class="hud-row">
-          <span class="hud-label">Scroll Y:</span>
-          <span class="hud-value hud-accent" id="hud-val-scrolly">0 px</span>
-        </div>
-        <div class="hud-row">
-          <span class="hud-label">Progreso Scroll:</span>
-          <span class="hud-value" id="hud-val-scrollpct">0.0%</span>
-        </div>
-        <div class="hud-row">
-          <span class="hud-label">Ventana (W×H):</span>
-          <span class="hud-value" id="hud-val-viewport">0 × 0</span>
-        </div>
-        <hr class="hud-divider">
-        <div class="hud-row">
-          <span class="hud-label">Foto Hero:</span>
-          <span class="hud-value" id="hud-val-photo">Top: 0 | Bot: 0</span>
-        </div>
-        <div class="hud-row">
-          <span class="hud-label">Tarjeta Lugar/Fecha:</span>
-          <span class="hud-value" id="hud-val-card">Top: 0 px</span>
-        </div>
-        <div class="hud-row">
-          <span class="hud-label">Lazos Pantalla:</span>
-          <span class="hud-value hud-tag" id="hud-val-bows">Ocultos</span>
-        </div>
-        <div class="hud-row">
-          <span class="hud-label">Efecto Humo Foto:</span>
-          <span class="hud-value" id="hud-val-smoke">0%</span>
-        </div>
-      </div>
-      <div class="hud-footer">
-        <small>📌 Usa estos números en px para indicar puntos exactos de scroll</small>
-      </div>
-    </div>
-  </aside>
-
   <!-- Scripts JavaScript -->
   <script src="js/animations.js"></script>
   <script src="js/main.js"></script>

@@ -72,7 +72,6 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   width: 100%;
-  overflow-x: hidden;
 }
 
 body {
@@ -141,17 +140,25 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none !important;
   overflow: hidden;
+}
+
+.stars-parallax-container * {
+  pointer-events: none !important;
 }
 
 .parallax-star {
   position: absolute;
   pointer-events: none !important;
   will-change: transform;
+}
+
+.parallax-star * {
+  pointer-events: none !important;
 }
 
 .parallax-star img {
@@ -1347,145 +1354,4 @@ body.envelope-locked {
 .toast-notice.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
-}
-
-/* ==========================================================================
-   16. HERRAMIENTA TEMPORAL: PANEL DE COORDENADAS DE SCROLL (DEBUG HUD)
-   ========================================================================== */
-.scroll-hud-container {
-  position: fixed;
-  bottom: 24px;
-  left: 20px;
-  z-index: 10000;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Consolas', monospace;
-  pointer-events: none; /* No intercepta gestos ni toques en la pantalla */
-}
-
-.scroll-hud-toggle-btn {
-  background: rgba(32, 25, 29, 0.90);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #f7d5df;
-  border: 1px solid rgba(212, 130, 150, 0.48);
-  padding: 8px 14px;
-  border-radius: var(--radius-full);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.25s ease;
-  pointer-events: auto; /* Solo el botón recibe clics */
-}
-
-.scroll-hud-toggle-btn:hover {
-  background: rgba(45, 34, 40, 0.98);
-  border-color: var(--primary-pink);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(212, 130, 150, 0.38);
-}
-
-.scroll-hud-panel {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 0;
-  width: 280px;
-  max-width: 90vw;
-  background: rgba(22, 17, 20, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(212, 130, 150, 0.38);
-  border-radius: 12px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42);
-  padding: 14px;
-  color: #f0e6eb;
-  font-size: 0.74rem;
-  animation: hudFadeIn 0.2s ease-out;
-}
-
-@keyframes hudFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hud-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.hud-title {
-  font-weight: 700;
-  color: #ffbcd2;
-  font-size: 0.78rem;
-}
-
-.hud-close-btn {
-  background: transparent;
-  border: none;
-  color: #baa2af;
-  font-size: 0.95rem;
-  cursor: pointer;
-  padding: 0 4px;
-  line-height: 1;
-}
-
-.hud-close-btn:hover {
-  color: #ffffff;
-}
-
-.hud-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.hud-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  line-height: 1.35;
-}
-
-.hud-label {
-  color: #a89aa1;
-}
-
-.hud-value {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.hud-accent {
-  color: #ff9ec0;
-  font-weight: 700;
-}
-
-.hud-tag {
-  background: rgba(212, 130, 150, 0.2);
-  color: #fcaec7;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 0.68rem;
-}
-
-.hud-divider {
-  border: none;
-  border-top: 1px dashed rgba(255, 255, 255, 0.12);
-  margin: 4px 0;
-}
-
-.hud-footer {
-  margin-top: 10px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #8c7e85;
-  font-size: 0.66rem;
-  line-height: 1.3;
 }

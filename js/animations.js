@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initEnvelopeOpening();
   initUnifiedScrollEngine();
-  initScrollCoordsHUD();
   createBackgroundSparkles();
 });
 
@@ -77,6 +76,7 @@ function initEnvelopeOpening() {
     // 3. La invitación ingresa de inmediato mientras el sobre desciende
     setTimeout(() => {
       envelopeOverlay.classList.add('revealing');
+      envelopeOverlay.style.pointerEvents = 'none';
       document.body.classList.remove('envelope-locked');
       document.body.style.overflow = '';
       document.body.style.height = '';
@@ -138,7 +138,7 @@ function revealHeroElements() {
 
 /* ==========================================================================
    3. MOTOR DE SCROLL CENTRALIZADO (ZERO LAYOUT-THRASHING / 120 FPS FLUIDEZ)
-   Unifica el fade de b1.webp, lluvia de estrellas, nubes, lazos, humo y HUD
+   Unifica el fade de b1.webp, lluvia de estrellas, nubes, lazos y humo
    ========================================================================== */
 function initUnifiedScrollEngine() {
   const topIllustration = document.getElementById('hero-top-illustration');
@@ -149,16 +149,6 @@ function initUnifiedScrollEngine() {
   const locCard = document.getElementById('card-lugar-fecha');
   const photoBox = document.getElementById('hero-photo-box') || document.querySelector('.hero-photo-wrapper');
   const stars = Array.from(document.querySelectorAll('.parallax-star'));
-  const hudPanel = document.getElementById('scroll-hud-panel');
-  
-  // Elementos del HUD
-  const valScrollY = document.getElementById('hud-val-scrolly');
-  const valScrollPct = document.getElementById('hud-val-scrollpct');
-  const valViewport = document.getElementById('hud-val-viewport');
-  const valPhoto = document.getElementById('hud-val-photo');
-  const valCard = document.getElementById('hud-val-card');
-  const valBows = document.getElementById('hud-val-bows');
-  const valSmoke = document.getElementById('hud-val-smoke');
 
   // Asegurar que los lazos NUNCA intercepten toques
   if (leftBow) leftBow.style.pointerEvents = 'none';
@@ -221,7 +211,7 @@ function initUnifiedScrollEngine() {
       topIllustration.style.pointerEvents = ratio >= 0.95 ? 'none' : 'auto';
     }
 
-    // 3. Capa de Estrellas Parallax (star.webp) - Lluvia mágica infinita con movimiento fluido
+    // 3. Capa de Estrellas Parallax (star.webp) - Lluvia mágica infinita
     if (stars.length > 0) {
       const cycleH = winHeight + 140;
       for (let i = 0; i < stars.length; i++) {
@@ -229,16 +219,13 @@ function initUnifiedScrollEngine() {
         const baseTop = parseFloat(star.dataset.baseTop) || (i * 55);
         const speed = parseFloat(star.dataset.speed) || 0.25;
 
-        // Desplazamiento parallax dinámico continuo según el scroll
+        // Desplazamiento parallax continuo según el scroll
         let relY = (baseTop - (scrollTop * speed)) % cycleH;
         if (relY < -70) {
           relY += cycleH;
         }
 
-        // Suave deriva horizontal orgánica celestial
-        const swayX = Math.sin((scrollTop * 0.003) + (i * 1.5)) * 8;
-
-        star.style.transform = `translate3d(${swayX.toFixed(1)}px, ${relY.toFixed(1)}px, 0)`;
+        star.style.transform = `translate3d(0, ${relY.toFixed(1)}px, 0)`;
       }
     }
 
@@ -266,7 +253,6 @@ function initUnifiedScrollEngine() {
       if (scrollTop < appearStart) {
         leftBow.style.opacity = '0';
         rightBow.style.opacity = '0';
-        window._hudBowState = 'Ocultos';
       } else if (scrollTop >= appearStart && scrollTop < appearComplete) {
         const progress = (scrollTop - appearStart) / (appearComplete - appearStart);
         const currentOpacity = (progress * 0.70).toFixed(3);
@@ -286,8 +272,6 @@ function initUnifiedScrollEngine() {
 
         leftBow.style.transform = `translate3d(${curXLeft}px, ${curY}px, 0) scale(${currentScale}) rotate(${rotLeft}deg)`;
         rightBow.style.transform = `translate3d(${curXRight}px, ${curY}px, 0) scale(${currentScale}) rotate(${rotRight}deg)`;
-
-        window._hudBowState = `Apareciendo (${Math.round(progress * 100)}%)`;
       } else {
         // En 580px en adelante: Asentados SOBRE la tarjeta
         if (cardViewportBottom < 80) {
@@ -295,11 +279,9 @@ function initUnifiedScrollEngine() {
           const exitOpacity = Math.max(0.70 * (1 - exitProgress), 0).toFixed(3);
           leftBow.style.opacity = exitOpacity;
           rightBow.style.opacity = exitOpacity;
-          window._hudBowState = exitOpacity <= 0.05 ? 'Desaparecidos con Tarjeta' : 'Saliendo de Pantalla';
         } else {
           leftBow.style.opacity = '0.70';
           rightBow.style.opacity = '0.70';
-          window._hudBowState = 'Sobre la Tarjeta (580px+)';
         }
 
         const curXLeft = targetLeftX.toFixed(1);
@@ -325,8 +307,6 @@ function initUnifiedScrollEngine() {
         smokeProgress = Math.min(Math.max(smokeProgress, 0), 1);
       }
 
-      window._hudSmokeProgress = Math.round(smokeProgress * 100);
-
       if (smokeProgress <= 0) {
         photoBox.style.opacity = '1';
         photoBox.style.filter = 'none';
@@ -341,21 +321,6 @@ function initUnifiedScrollEngine() {
         photoBox.style.filter = `blur(${blurAmount}px)`;
         photoBox.style.transform = `scale(${scaleAmount}) translate3d(0, ${translateY}px, 0)`;
         photoBox.style.pointerEvents = opacity <= 0.05 ? 'none' : 'auto';
-      }
-    }
-
-    // 7. Actualización del panel HUD solo si está activo
-    if (hudPanel && hudPanel.style.display !== 'none') {
-      const pct = docHeight > 0 ? ((scrollTop / docHeight) * 100).toFixed(1) : '0.0';
-      if (valScrollY) valScrollY.textContent = `${Math.round(scrollTop)} px`;
-      if (valScrollPct) valScrollPct.textContent = `${pct}%`;
-      if (valViewport) valViewport.textContent = `${winWidth} × ${winHeight}`;
-      if (valPhoto) valPhoto.textContent = `T:${Math.round(photoTopDoc - scrollTop)} | B:${Math.round(photoTopDoc + photoHeight - scrollTop)}`;
-      if (valCard) valCard.textContent = `Top: ${Math.round(cardTopDoc - scrollTop)} px`;
-      if (valBows) valBows.textContent = window._hudBowState || 'Ocultos';
-      if (valSmoke) {
-        const smokeVal = window._hudSmokeProgress || 0;
-        valSmoke.textContent = smokeVal > 0 ? `Humo: ${smokeVal}%` : '0% (Nítida)';
       }
     }
   };
@@ -377,31 +342,7 @@ function initUnifiedScrollEngine() {
 }
 
 /* ==========================================================================
-   4. PANEL DE COORDENADAS DE SCROLL EN TIEMPO REAL (DEBUG HUD)
-   ========================================================================== */
-function initScrollCoordsHUD() {
-  const toggleBtn = document.getElementById('scroll-hud-toggle-btn');
-  const hudPanel = document.getElementById('scroll-hud-panel');
-  const closeBtn = document.getElementById('hud-close-btn');
-
-  if (!toggleBtn || !hudPanel) return;
-
-  let isPanelOpen = false;
-
-  const togglePanel = (show) => {
-    isPanelOpen = typeof show === 'boolean' ? show : !isPanelOpen;
-    hudPanel.style.display = isPanelOpen ? 'block' : 'none';
-    toggleBtn.setAttribute('aria-expanded', isPanelOpen ? 'true' : 'false');
-    toggleBtn.style.background = isPanelOpen ? 'rgba(212, 130, 150, 0.95)' : '';
-    toggleBtn.style.color = isPanelOpen ? '#ffffff' : '';
-  };
-
-  toggleBtn.addEventListener('click', () => togglePanel());
-  if (closeBtn) closeBtn.addEventListener('click', () => togglePanel(false));
-}
-
-/* ==========================================================================
-   5. DESTELLOS DORADOS SUTILES EN EL FONDO
+   4. DESTELLOS DORADOS SUTILES EN EL FONDO
    ========================================================================== */
 function createBackgroundSparkles() {
   const container = document.querySelector('.invitation-container');
@@ -419,7 +360,7 @@ function createBackgroundSparkles() {
 }
 
 /* ==========================================================================
-   6. GENERADOR DE SONIDO CELESTIAL NATIVO (SIN DEPENDENCIAS EXTERNAS)
+   5. GENERADOR DE SONIDO CELESTIAL NATIVO (SIN DEPENDENCIAS EXTERNAS)
    ========================================================================== */
 function playChimeSound() {
   try {
