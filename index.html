@@ -59,6 +59,13 @@
   </button>
 
   <!-- ====================================================================
+       MARCA DE AGUA DE FONDO (b4.webp) - BEBÉ EN ARCOÍRIS (20% OPACIDAD)
+       ==================================================================== -->
+  <div class="bg-watermark-fixed" aria-hidden="true">
+    <img src="assets/images/b4.webp" alt="Decoración de fondo arcoíris y bebé" class="bg-watermark-img">
+  </div>
+
+  <!-- ====================================================================
        CAPA DE ESTRELLAS PARALLAX (star.webp) - LLUVIA DE ESTRELLAS
        Jerarquía de capas: Fondo (0) -> Estrellas (1) -> Nubes (2) -> Contenido (3)
        ==================================================================== -->
@@ -110,6 +117,24 @@
        ==================================================================== -->
   <div class="envelope-overlay" id="envelope-overlay" role="dialog" aria-modal="true"
     aria-label="Apertura de invitación">
+
+    <!-- Fondo de b4.webp tenue en grande para la pantalla del sobre (20% opacidad) -->
+    <div class="envelope-bg-watermark" aria-hidden="true">
+      <img src="assets/images/b4.webp" alt="" class="envelope-watermark-img">
+    </div>
+
+    <!-- Estrellas flotantes y titilantes en la pantalla del sobre -->
+    <div class="envelope-stars-container" aria-hidden="true">
+      <div class="env-star env-star-1"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-2"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-3"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-4"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-5"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-6"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-7"><img src="assets/images/star.webp" alt=""></div>
+      <div class="env-star env-star-8"><img src="assets/images/star.webp" alt=""></div>
+    </div>
+
     <div class="envelope-scene" id="envelope-trigger" role="button" tabindex="0"
       aria-label="Sobre de invitación. Presiona para abrir">
 
@@ -118,6 +143,11 @@
 
       <!-- Contenedor de la imagen del sobre con texto interactivo encima -->
       <div class="envelope-img-box" id="envelope-img-box">
+        <!-- Estrellas mágicas sobre el sobre y alrededor del botón -->
+        <div class="env-star-accent env-star-accent-1"><img src="assets/images/star.webp" alt=""></div>
+        <div class="env-star-accent env-star-accent-2"><img src="assets/images/star.webp" alt=""></div>
+        <div class="env-star-accent env-star-accent-3"><img src="assets/images/star.webp" alt=""></div>
+
         <img src="assets/images/sobre.png" alt="Sobre de invitación para Baby Shower de Lilith" class="envelope-img"
           id="envelope-img" draggable="false">
 
